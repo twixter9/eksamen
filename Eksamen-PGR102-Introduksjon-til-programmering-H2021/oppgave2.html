@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 2 - Dragracing</title>
+    <link rel="stylesheet" href="css/oppgave2.css">
+</head>
+
+<body>
+
+    <h1>Dragracing</h1>
+
+    <div id="road-div"></div>
+
+    <img id="blue-car" src="images/blue-car.png">
+    <img id="green-car" src="images/green-car.png">
+    <img id="red-car" src="images/red-car.png">
+
+    <div id="finish-line"></div>
+
+    <div id="output-div"></div>
+    <input id="start-btn" type="button" value="Start race" style="position: absolute;">
+
+
+    <script>
+        blueCar = document.getElementById("blue-car");
+        greenCar = document.getElementById("green-car");
+        redCar = document.getElementById("red-car");
+        outputDiv = document.getElementById("output-div");
+        startBtn = document.getElementById("start-btn");
+
+
+        blueCarForward = 0
+        greenCarForward = 0
+        redCarForward = 0
+
+        function startRace() {
+            function moveForward() {
+
+                blueCarForward += Math.floor(Math.random() * 201);
+                blueCar.style.left = `${blueCarForward}px`;
+                greenCarForward += Math.floor(Math.random() * 201);
+                greenCar.style.left = `${greenCarForward}px`;
+                redCarForward += Math.floor(Math.random() * 201);
+                redCar.style.left = `${redCarForward}px`;
+
+                if (blueCarForward >= 700) {
+                    outputDiv.innerHTML = "Blue car won!"
+                }
+                if (redCarForward >= 700) {
+                    outputDiv.innerHTML = "Red car won!"
+                }
+                if (greenCarForward >= 700) {
+                    outputDiv.innerHTML = "Green car won!"
+                }
+                if (greenCarForward >= 700 || redCarForward >= 700 || blueCarForward >= 700) {
+                    clearInterval(carInterval);
+                }
+
+            }
+            var carInterval = setInterval(moveForward, 2000);
+        }
+
+        startBtn.onclick = startRace
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 3 - Middelalderbygninger</title>
+</head>
+
+<body>
+
+    <!-- Det er lov å endre/legge til HTML -->
+
+    <h1>Middelalderbygninger</h1>
+    <p>Lyst til å bo i en middelalderbygning? Vi har de beste middelalderbygningene! :)</p>
+
+    <input id="show-all-btn" type="button" value="Vis alle">
+
+    <hr>
+
+    <label>Minimum pris</label>
+    <input id="min-price" type="text">
+    <label>Maksimum pris</label>
+    <input id="max-price" type="text">
+    <input id="price-btn" type="button" value="Vis etter pris">
+
+    <hr>
+
+    <!-- Hint: Å hente value fra valgt <option> fungerer på samme måte som å hente value fra en tekstboks -->
+    <select id="category-select">
+        <!-- Du endrer på options for å tilpasse til din løsning -->
+        <option>--Velg kategori--</option>
+        <option value="hytte">hytte</option>
+        <option value="hotell">hotell</option>
+        <option value="slott">slott</option>
+    </select>
+    <input id="category-btn" type="button" value="Vis etter kategori">
+
+    <hr>
+
+    <div id="output-div">
+
+    </div>
+
+    <script>
+        categorySelect = document.getElementById("category-select");
+        showAllBtn = document.getElementById("show-all-btn");
+        outputDiv = document.getElementById("output-div");
+        categoryBtn = document.getElementById("category-btn");
+        priceBtn = document.getElementById("price-btn");
+        minPrice = document.getElementById("min-price");
+        maxPrice = document.getElementById("max-price");
+
+
+
+        var buildingArray = [
+            {
+                name: "hytte",
+                price: 100,
+                imageName: "building-1.png",
+                category: "hytte"
+            },
+            {
+                name: "hytte med pipe",
+                price: 200,
+                imageName: "building-2.png",
+                category: "hytte"
+            },
+            {
+                name: "to-etasjers hytte",
+                price: 300,
+                imageName: "building-3.png",
+                category: "hytte"
+            },
+            {
+                name: "hotell",
+                price: 600,
+                imageName: "building-4.png",
+                category: "hotell"
+            },
+            {
+                name: "snilt slott",
+                price: 900,
+                imageName: "building-5.png",
+                category: "slott"
+            },
+            {
+                name: "slemt slott",
+                price: 800,
+                imageName: "building-6.png",
+                category: "slott"
+            }
+        ]
+
+        function showAll() {
+            outputDiv.innerHTML = "";
+            for (let i = 0; i < buildingArray.length; i++) {
+                outputDiv.innerHTML += `
+                    <h3>${buildingArray[i].name}</h3> 
+                    <img src="/images/${buildingArray[i].imageName}">
+                    <p>pris: ${buildingArray[i].price} roubles</p>
+                    <p>kategori: ${buildingArray[i].category}</p>
+                `;
+            }
+
+        }
+
+        function searchCategory() {
+            outputDiv.innerHTML = "";
+            var categoryInput = document.getElementById("category");
+
+            for (let i = 0; i < buildingArray.length; i++) {
+                if (buildingArray[i].category === categorySelect.value) {
+                    outputDiv.innerHTML += `
+                    <h3>${buildingArray[i].name}</h3> 
+                    <img src="/images/${buildingArray[i].imageName}">
+                    <p>pris: ${buildingArray[i].price} roubles</p>
+                    <p>kategori: ${buildingArray[i].category}</p>
+                `;
+                }
+
+            }
+
+        }
+
+        function searchPrice() {
+            outputDiv.innerHTML = "";
+            for (let i = 0; i < buildingArray.length; i++) {
+                if (buildingArray[i].price >= minPrice.value && buildingArray[i].price <= maxPrice.value) {
+                    outputDiv.innerHTML += `
+                    <h3>${buildingArray[i].name}</h3> 
+                    <img src="/images/${buildingArray[i].imageName}">
+                    <p>pris: ${buildingArray[i].price} roubles</p>
+                    <p>kategori: ${buildingArray[i].category}</p>
+                `;
+                }
+
+            }
+        }
+
+        categoryBtn.onclick = searchCategory;
+        priceBtn.onclick = searchPrice;
+        showAllBtn.onclick = showAll;
+    </script>
+
+</body>
+
+</html>

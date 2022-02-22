@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 1</title>
+    <link rel="stylesheet" type="text/css" href="css/oppgave1.css">
+</head>
+
+<body>
+
+    <!-- Det er lov å endre/legge til HTML -->
+
+    <h1>Modern Art Maker</h1>
+
+    <label>Bredde</label>
+    <input id="width-txt" type="text">
+
+    <label>Høyde</label>
+    <input id="height-txt" type="text">
+
+    <hr>
+
+    <label>Farge</label>
+    <input id="background-color-txt" type="text">
+
+    <hr>
+
+    <label>Posisjon fra venstre (left)</label>
+    <input id="left-txt" type="text">
+
+    <label>Posisjon fra toppen (top)</label>
+    <input id="top-txt" type="text">
+
+    <hr>
+
+    <input id="add-box-btn" type="button" value="Legg til">
+    <input id="remove-box-btn" type="button" value="Fjern alle bokser">
+    <p id="status-p">Antall bokser lagt til: <span id="amt-divs">0</span></p>
+
+    <div id="output-div"></div>
+
+    <script>
+        //dette er her jeg henter alle html elementene
+        width = document.getElementById("width-txt");
+        height = document.getElementById("height-txt");
+        color = document.getElementById("background-color-txt");
+        left = document.getElementById("left-txt");
+        topTxt = document.getElementById("top-txt");
+        addBtn = document.getElementById("add-box-btn");
+        removeBtn = document.getElementById("remove-box-btn");
+        outputDiv = document.getElementById("output-div");
+        amtDivs = document.getElementById("amt-divs");
+        //dette er variabelen for antall bokser lagt til
+        divsMade = 0
+
+        function makeDiv() {
+            //i denne funjskonen legger jeg til en div i outputdiv som er stylet, også henter jeg alle verdiene jeg trenger
+            outputDiv.innerHTML += `<div style="background-color: ${color.value};width: ${width.value}px;height: ${height.value}px;left: ${left.value}px;top: ${topTxt.value}px"></div>`;
+            //her legger jeg til +1 til antall bokser
+            divsMade++;
+            amtDivs.innerHTML = divsMade;
+        }
+        function removeDivs() {
+            //her fjerner jeg alt innholdet fra outputdiven
+            outputDiv.innerHTML = "";
+        }
+        //kaller på de forskjellige funskjonene når jeg trykker på knappene
+        addBtn.onclick = makeDiv;
+        removeBtn.onclick = removeDivs;
+
+    </script>
+
+</body>
+
+</html>

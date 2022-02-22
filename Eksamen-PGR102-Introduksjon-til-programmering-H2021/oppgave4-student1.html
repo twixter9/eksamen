@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 4 - Student 1</title>
+</head>
+
+<body>
+    <h1>Minnespill</h1>
+    <input id="show-btn" type="button" value="Vis et tall">
+    <h2>Husk dette tallet: <span id="random-number-span"></span></h2>
+    <label>skriv inn tallet her:</label>
+    <input id="number-check-txt" onfocus="this.value=''" type="text">
+    <input id="check-btn" type="button" value="Sjekk om det er riktig">
+    <p>Antall riktige: <span id="right-span">0</span></p>
+    <p>Antall feil: <span id="wrong-span">0</span></p>
+
+    <script>
+        var randomNumberSpan = document.getElementById("random-number-span");
+        var showBtn = document.getElementById("show-btn");
+        var numberCheckTxt = document.getElementById("number-check-txt");
+        var checkBtn = document.getElementById("check-btn");
+        var rightSpan = document.getElementById("right-span");
+        var wrongSpan = document.getElementById("wrong-span");
+
+        var amountOfRight = 0;
+        var amountOfWrong = 0;
+        var number = null;
+
+
+        function showRandomNumber() {
+            randomNumber = Math.floor(Math.random() * 1000001);
+            randomNumberSpan.innerHTML = randomNumber;
+            number = randomNumber;
+            numberCheckTxt.value = "";
+            setTimeout(removeRandomNumber, 1000);
+        }
+        function removeRandomNumber() {
+            randomNumberSpan.innerHTML = ""
+        }
+
+
+        function checkIfRight() {
+            if (number === null) {
+                numberCheckTxt.value = "Trykk på: Vis et tall"
+            } else {
+                if (numberCheckTxt.value === "" || numberCheckTxt.value === "Du må skrive inn et tall") {
+                    numberCheckTxt.value = "Du må skrive inn et tall"
+                } else {
+                    if (number == numberCheckTxt.value) {
+                        amountOfRight++
+                        rightSpan.innerHTML = amountOfRight;
+                        numberCheckTxt.value = "";
+                    } else {
+                        amountOfWrong++
+                        wrongSpan.innerHTML = amountOfWrong;
+                        numberCheckTxt.value = "";
+                    }
+                }
+            }
+
+        }
+
+
+        showBtn.onclick = showRandomNumber,
+            checkBtn.onclick = checkIfRight;
+    </script>
+</body>
+
+</html>
